@@ -29,4 +29,8 @@ public class Model {
 	public boolean isStudenteIscrittoAlCorso (Corso c, Studente s) {
 		return sdao.isStudenteIscrittoAlCorso(c, s);
 	}
+	
+	public boolean iscriviStudenteACorso(Studente studente, Corso corso) {
+		return cdao.iscriviStudenteACorso(studente, corso);
+	}
 }

@@ -140,28 +140,7 @@ public class FXMLController {
 
     @FXML
     void doCercaNome(ActionEvent event) {
-//    	txtResult.clear();
-//    	
-//    	boolean isIscritto = false;
-//    	String matricola = txtMatricola.getText();
-//    	Studente s = this.model.getStudentebyMatricola(matricola);
-//    	
-//    	Corso c = comboCorso.getValue();
-//    	if(c == null) {
-//    		txtResult.setText("Scegliere un corso!");
-//    		return;
-//    	}
-//    	
-//    	isIscritto = this.model.isStudenteIscrittoAlCorso(c, s);
-//    	
-//    	if(isIscritto) {
-//    		txtResult.setText("Lo studente '" + s.getMatricola() + "' è iscritto al corso " + c.getCodins() + ".");
-//    	} else {
-//    		txtResult.setText("Lo studente '" + s.getMatricola() + "' non risulta essere"
-//    				+ " iscritto al corso " + c.getCodins() + ".");
-//    	}
-    	
-    	// questo è relativo al cerca nome.... l'icona verde per l'autocompletamento del nome e cognome...
+
     	txtResult.clear();
     	
     	String matricola = txtMatricola.getText();
@@ -176,7 +155,54 @@ public class FXMLController {
 
     @FXML
     void doIscrivi(ActionEvent event) {
-    	//TODO
+    	
+    	txtResult.clear();
+    	
+    	try {
+    		
+    		if (txtMatricola.getText().isEmpty()) {
+    			txtResult.setText("Inserire una matricola.");
+    			return;
+    		}
+    		
+    		if (comboCorso.getValue() == null) {
+    			txtResult.setText("Selezionare un corso.");
+    			return;
+    		}
+    		
+    		String matricola = txtMatricola.getText();
+    		Studente s = this.model.getStudentebyMatricola(matricola);
+    		
+    		if(s.getNome() == null) {
+    			txtResult.appendText("Nessun risultato: matricola inesistente");
+    			return;
+    		}
+    		
+    		txtNome.setText(s.getNome());
+    		txtCognome.setText(s.getCognome());
+    		
+    		Corso c = comboCorso.getValue();
+    		
+    		if(model.isStudenteIscrittoAlCorso(c, s)) {
+    			txtResult.setText("Lo studente è già iscritto a questo corso.");
+    			return;
+    		}
+    		
+    		// Iscrivo lo studente al corso!
+    		if(!model.iscriviStudenteACorso(s, c)) {
+    			txtResult.setText("Errore durante l'iscrizione al corso.");
+    			return;
+    		} else {
+    			txtResult.setText("Lo studente è stato iscritto correttamente al corso.");
+    		}
+    		
+    		
+    	} catch (NumberFormatException e) {
+			txtResult.setText("Inserire una matricola nel formato corretto.");
+		} catch (RuntimeException e) {
+			txtResult.setText("ERRORE DI CONNESSIONE AL DATABASE!");
+		}
+    		
     }
 
     @FXML
