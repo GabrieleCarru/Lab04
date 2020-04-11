@@ -1,6 +1,6 @@
 package it.polito.tdp.lab04.model;
 
-public class Corso {
+public class Corso implements Comparable<Corso>{
 	private String codins;
 	private Integer crediti;
 	private String nome;
@@ -60,7 +60,7 @@ public class Corso {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((codins == null) ? 0 : codins.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
 	}
 
@@ -74,10 +74,10 @@ public class Corso {
 		if (getClass() != obj.getClass())
 			return false;
 		Corso other = (Corso) obj;
-		if (codins == null) {
-			if (other.codins != null)
+		if (nome == null) {
+			if (other.nome != null)
 				return false;
-		} else if (!codins.equals(other.codins))
+		} else if (!nome.equals(other.nome))
 			return false;
 		return true;
 	}
@@ -85,7 +85,13 @@ public class Corso {
 
 	@Override
 	public String toString() {
-		return codins + " - " + nome + "\n";
+		return nome ;
+	}
+
+
+	@Override
+	public int compareTo(Corso o) {
+		return this.nome.compareTo(o.nome);
 	}
 	
 	

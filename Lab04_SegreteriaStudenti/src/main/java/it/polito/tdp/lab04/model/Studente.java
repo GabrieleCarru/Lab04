@@ -17,6 +17,14 @@ public class Studente {
 	}
 
 
+	public Studente(Integer matricolaID) {
+		this.matricola = matricolaID;
+		this.cognome = null;
+		this.cognome = null;
+		this.CDS = null;
+	}
+
+
 	public Integer getMatricola() {
 		return matricola;
 	}

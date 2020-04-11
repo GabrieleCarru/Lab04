@@ -6,9 +6,15 @@ public class TestModel {
 
 		Model model = new Model();
 		
-		/*
-		 * 	Write here your test model
-		 */
+		System.out.println(model.getTuttiICorsi());
+		
+		System.out.println("Get Studenti Iscritti al Corso: \n");
+		System.out.println(model.getStudentiIscrittiAlCorso(new Corso("01KSUPG", null, null, null)));
+		
+		System.out.println("Get Corsi a cui è iscritto lo Studente: \n");
+		System.out.println(model.getCorsibyStudente(new Studente(161245, null, null, null)));
+		
+		
 
 	}
 
